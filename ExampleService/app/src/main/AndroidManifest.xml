@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cs478.exampleservice">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher">
+
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="true" >
+
+            <intent-filter>
+                <action android:name="com.cs478.services.IExampleAIDL"/>
+            </intent-filter>
+
+        </service>
+    </application>
+
+</manifest>
