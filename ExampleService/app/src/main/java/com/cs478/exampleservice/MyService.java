@@ -19,6 +19,11 @@ import com.cs478.services.IExampleAIDL;
 
 import java.util.ArrayList;
 
+/**
+ * This is the service class
+ * */
+
+
 public class MyService extends Service {
     public MyService() {
     }
