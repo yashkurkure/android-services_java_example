@@ -15,6 +15,9 @@
             android:exported="true" >
 
             <intent-filter>
+                <!--Notice that this action's name is the same as the location of the .aidl file.
+        This is because the client has a copy of the entire .aidl package, which it can
+        use to resolve the intent as an explicit intent-->
                 <action android:name="com.cs478.services.IExampleAIDL"/>
             </intent-filter>
 
