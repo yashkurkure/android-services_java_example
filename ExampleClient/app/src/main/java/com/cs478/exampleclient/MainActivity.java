@@ -36,9 +36,26 @@ public class MainActivity extends AppCompatActivity
 
 
 
+    /**
+     *
+     * NOTES: >The mIExampleAIDL object is responsible for the API calls.
+     *        >This object is retrieved from the IBinder received in onServiceConnected().
+     *        >The API is defined in the .aidl file.
+     *        >This objects allows the app to directly make calls to the service, like it were a local call.
+     *
+     *        >Remember the proxy design pattern? (I know you don't remember so look it up now!)
+     *        >This object is the proxy object on the client side.
+     * */
     private IExampleAIDL mIExampleAIDL;
     private boolean mIsBound = false;
 
+
+
+    /**
+     * onCreate()
+     *
+     * called when activity created
+     * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,6 +157,16 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    /**
+     * Notes: This is where we receive the IBinder object from the service.
+     *        We implements two methods here:
+     *
+     *        onServiceConnected() => get the IBinder object here, and this method is called when
+     *        the there is a successful connection after asking to bind.
+     *
+     *        onServiceDisconnected() => called when the service unexpectedly crashes.
+     *
+     * */
     private final ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -173,6 +200,7 @@ public class MainActivity extends AppCompatActivity
         {
             boolean b = false;
 
+            //We need an explicit intent to start the service
             Intent i = new Intent(IExampleAIDL.class.getName());
             ResolveInfo info = getPackageManager().resolveService(i,0);
             i.setComponent(new ComponentName(info.serviceInfo.packageName, info.serviceInfo.name));
@@ -196,6 +224,12 @@ public class MainActivity extends AppCompatActivity
 
         }
 
+    /**
+     * Called when app stops
+     *
+     * Unbind from service here if bound
+     *
+     * */
     @Override
     protected void onStop() {
         super.onStop();
